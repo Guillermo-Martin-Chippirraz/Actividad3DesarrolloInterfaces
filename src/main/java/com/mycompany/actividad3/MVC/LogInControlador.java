@@ -12,21 +12,24 @@ import java.awt.event.*;
  */
 public class LogInControlador {
     private LogInVista vista;
-    private LogInModelo modelo;
     
-    public LogInControlador(LogInVista vista, LogInModelo modelo){
-        this.vista = new LogInVista();
-        this.modelo = new LogInModelo(vista.getTxtUsuario(), 
-                vista.getTxtPasswordTxt());
-
+    public LogInControlador(LogInVista vista){
+        this.vista = vista;
         
         vista.getBtnLogIn().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                String usuario = vista.getTxtUsuarioTxt();
+                char[] password = vista.getTxtPasswordTxt();
+                
+                LogInModelo modelo = new LogInModelo(usuario, password);
+                
                 if(modelo.check())
-                    vista.getLblCheck().setText("El usuario es válido.");
-                else vista.getLblCheck().setText("El usuario o la contraseña "
-                        + "no son válidos.");
+                    vista.setLblCheck("El usuario es válido.");
+                else
+                    vista.setLblCheck("El usuario o la contraseña no son "
+                            + "válidos.");
             }
-        })
+        });
     }
+    
 }

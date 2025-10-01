@@ -15,28 +15,21 @@ public class LogInModelo extends JFrame{
     private static final char[] PASS = {'1', '2', '3', '4'};
     
     private String usuario;
-    private char[] pass;
+    private char[] password;
     
-    public LogInModelo(String usuario, char [] pass){
+    public LogInModelo(String usuario, char[] password){
         this.usuario = usuario;
-        for(int i = 0; i < pass.length; i++)
-            this.pass[i] = pass[i];
-        
+        this.password = password;
     }
     
     public boolean check(){
-        boolean check = true;
-            
-            if(pass.length == PASS.length){
-                for(int i = 0; i < pass.getPassword().length; i++){
-                    if(pass[i] != PASS[i])
-                        check = false;
-                }
-            }else check = false;
+        if(!usuario.equals(USER)) return false;
+        if(password.length != PASS.length) return false;
         
-            if(USER.equals(usuario) && check)
-                return true;
-            else return false;
-            
+        for(int i = 0; i < PASS.length; i++){
+            if(password[i] != PASS[i]) return false;
+        }
+        
+        return true;
     }
 }
